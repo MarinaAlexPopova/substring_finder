@@ -41,7 +41,7 @@ def main(settings):
                     final_table.append([gene, i+1, i+len(substring), '+', substring, '\n'])
             if ind_reverse:
                 for i in ind_reverse:
-                    final_table.append([gene, len(seq)-i-len(substring)+1, len(seq)-i, '-', substring, '\n'])
+                    final_table.append([gene, i+1, i+len(substring), '-', substring, '\n'])
 
     with open(Path(settings['output_file']), 'w') as file:
         file.write('#chr #start_position #stop_position #strand #subsring_seq\n')
