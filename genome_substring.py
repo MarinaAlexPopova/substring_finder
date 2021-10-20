@@ -34,8 +34,8 @@ def main(settings):
 
     final_table = []
     for gene, seq in genes_dict.items():
-            ind = [i.start() for i in re.finditer(f'(?={substring})', seq)]
-            ind_reverse = [i.start() for i in re.finditer(f'(?={substring_reverse})', seq)]
+            ind = [i.start() for i in re.finditer(f'(?={substring})', seq.upper())]
+            ind_reverse = [i.start() for i in re.finditer(f'(?={substring_reverse})', seq.upper())]
             if ind:
                 for i in ind:
                     final_table.append([gene, i+1, i+len(substring), '+', substring, '\n'])
@@ -46,7 +46,7 @@ def main(settings):
     with open(Path(settings['output_file']), 'w') as file:
         file.write('#chr #start_position #stop_position #strand #subsring_seq\n')
         file.writelines([' '.join(str(j) for j in i) for i in sorted(final_table)])
-        
+    print(f'{len(final_table)} substring{"s" if len(final_table) > 1 else ""} {"was" if len(final_table) < 2 else "were"} found in the genome')    
 
 
 if __name__ == '__main__':
